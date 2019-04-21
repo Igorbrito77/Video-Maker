@@ -1,13 +1,17 @@
 const readline = require("readline-sync")
+const robots = {
+	text: require('./robots/text.js')
+}
 
-
-function start(){
+async function start(){
 	//objeto que guarda todo o conteúdo das pesquisas (termos, sentanças, url das imagens)
 	const content = {}
 	content.searchTerm = askAndReturnSearchTerm()
 
 	//prefixo que será utilizado ao fazer o upload do vídeo no youtube, a fim de criar um título mais completo
 	content.prefix = askAndReturnPrefix()
+
+	await robots.text(content) //Espera o robô acabae de comṕutar os dados
 
 	function askAndReturnSearchTerm(){
 		//injeta a string como valor dentro do atributo searchTerm
@@ -22,7 +26,7 @@ function start(){
 		return selectedPrefixTest;
 	}
 
-	console.log(content);
+//	console.log(content);
 }
 
 start()
